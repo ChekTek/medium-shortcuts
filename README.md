@@ -1,2 +1,3 @@
-# medium-shortcuts
-Browser extension to display keyboard shortcuts while writing on Medium.
+# Medium Shortcuts
+
+This adds a list of keyboard shortcuts to the Medium editor window.
