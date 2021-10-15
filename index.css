@@ -1,3 +1,15 @@
+#hide {
+  position: fixed;
+  margin-top: -34px;
+}
+
+#show {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  opacity: 0;
+}
+
 #medium-shortcuts {
   display: flex;
   flex-direction: column;
@@ -12,11 +24,48 @@
   padding: 4px;
 }
 
-/* TODO: figure out css breakpoints */
-
-@media (max-width: 1100px) {
+@media (max-width: 1580px) {
   #medium-shortcuts {
     max-width: 325px;
+  }
+}
+
+@media (max-width: 1430px) {
+  #hide {
+    margin-top: 0px;
+    margin-left: -54px;
+  }
+
+  #medium-shortcuts {
+    max-width: 740px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 10px;
+  }
+
+  #medium-shortcuts .table-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  #medium-shortcuts .drawer-listCell {
+    font-size: 15px;
+    padding: 2px 6px;
+  }
+
+  #medium-shortcuts .drawer-keyboardKey {
+    min-width: 15px;
+    padding: 3px 6px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+  }
+
+  #medium-shortcuts .title {
+    display: block;
+    font-size: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
   }
 }
 
@@ -40,11 +89,11 @@
 }
 
 .fade-in {
-  opacity: 1;
+  opacity: 1 !important;
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
 }
 
 @keyframes fadeInOpacity {
@@ -53,5 +102,23 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+.fade-out {
+  opacity: 0 !important;
+  animation-name: fadeOutOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
+  z-index: -99999 !important;
+}
+
+@keyframes fadeOutOpacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
