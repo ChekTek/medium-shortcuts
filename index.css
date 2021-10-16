@@ -30,7 +30,28 @@
   }
 }
 
-@media (max-width: 1430px) {
+@media (max-height: 848px), (max-width: 1430px) {
+  #medium-shortcuts .drawer-listCell {
+    font-size: 15px;
+    padding: 2px 6px;
+  }
+
+  #medium-shortcuts .drawer-keyboardKey {
+    min-width: 15px;
+    padding: 3px 6px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+  }
+
+  #medium-shortcuts .title {
+    display: block;
+    font-size: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+}
+
+@media (max-width: 1430px), (max-height: 668px) {
   body {
     padding-bottom: 380px;
   }
@@ -51,25 +72,6 @@
   #medium-shortcuts .table-container {
     display: flex;
     justify-content: space-evenly;
-  }
-
-  #medium-shortcuts .drawer-listCell {
-    font-size: 15px;
-    padding: 2px 6px;
-  }
-
-  #medium-shortcuts .drawer-keyboardKey {
-    min-width: 15px;
-    padding: 3px 6px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-  }
-
-  #medium-shortcuts .title {
-    display: block;
-    font-size: 20px;
-    margin-top: 2px;
-    margin-bottom: 2px;
   }
 }
 
