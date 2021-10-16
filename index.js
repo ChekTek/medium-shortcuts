@@ -256,19 +256,16 @@ const macKeys = `
 `;
 
 const platform = window.navigator.userAgentData.platform.toLowerCase();
-const isWindows = platform.includes("win");
 const isMac = platform.includes("mac");
 
-if (isWindows) {
-  document
-    .getElementsByTagName("body")[0]
-    .insertAdjacentHTML("beforeend", windowsKeys);
-} else if (isMac) {
+if (isMac) {
   document
     .getElementsByTagName("body")[0]
     .insertAdjacentHTML("beforeend", macKeys);
 } else {
-  alert("Medium Keyboard Shortcuts could not detect keyboard layout.");
+  document
+    .getElementsByTagName("body")[0]
+    .insertAdjacentHTML("beforeend", windowsKeys);
 }
 
 const shortcuts = document.getElementById("medium-shortcuts");
