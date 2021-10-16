@@ -1,11 +1,11 @@
 {
   "name": "Medium Shortcuts",
   "description": "This adds a list of keyboard shortcuts to the Medium editor window.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 3,
   "content_scripts": [
     {
-      "matches": ["https://medium.com/**/edit"],
+      "matches": ["https://medium.com/**/edit", "https://medium.com/new-story"],
       "js": ["index.js"],
       "css": ["index.css"]
     }
