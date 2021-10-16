@@ -31,13 +31,17 @@
 }
 
 @media (max-width: 1430px) {
+  body {
+    padding-bottom: 380px;
+  }
+
   #hide {
-    margin-top: 0px;
-    margin-left: -54px;
+    margin-left: 12px;
+    margin-top: 4px;
   }
 
   #medium-shortcuts {
-    max-width: 740px;
+    max-width: 720px;
     left: 0;
     right: 0;
     margin: auto;
