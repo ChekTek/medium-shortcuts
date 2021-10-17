@@ -1,7 +1,7 @@
 {
   "name": "Medium Shortcuts",
   "description": "This adds a list of keyboard shortcuts to the Medium editor window.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "manifest_version": 3,
   "content_scripts": [
     {
