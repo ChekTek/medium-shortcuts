@@ -255,17 +255,16 @@ const macKeys = `
 </div>
 `;
 
-let showShortcuts = false;
-
-window.addEventListener(
-  "load",
+document.addEventListener(
+  "readystatechange",
   () => {
     const isEdit = window.location.href.endsWith("/edit");
     const isNewStory = window.location.href.endsWith("/new-story");
 
     if (isEdit || isNewStory) {
-      const platform = window.navigator.userAgentData.platform.toLowerCase();
-      const isMac = platform.includes("mac");
+      // attempts to solve browser inconsistencies
+      const platform = window?.navigator?.oscpu ?? window.navigator.platform;
+      const isMac = platform?.toLowerCase().includes("mac");
 
       if (isMac) {
         document
