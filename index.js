@@ -255,35 +255,48 @@ const macKeys = `
 </div>
 `;
 
-const platform = window.navigator.userAgentData.platform.toLowerCase();
-const isMac = platform.includes("mac");
+let showShortcuts = false;
 
-if (isMac) {
-  document
-    .getElementsByTagName("body")[0]
-    .insertAdjacentHTML("beforeend", macKeys);
-} else {
-  document
-    .getElementsByTagName("body")[0]
-    .insertAdjacentHTML("beforeend", windowsKeys);
-}
+window.addEventListener(
+  "load",
+  () => {
+    const isEdit = window.location.href.endsWith("/edit");
+    const isNewStory = window.location.href.endsWith("/new-story");
 
-const shortcuts = document.getElementById("medium-shortcuts");
-const hideButton = document.getElementById("hide");
-const showButton = document.getElementById("show");
+    if (isEdit || isNewStory) {
+      const platform = window.navigator.userAgentData.platform.toLowerCase();
+      const isMac = platform.includes("mac");
 
-hideButton.addEventListener("click", () => {
-  showButton.classList.remove("fade-out");
-  showButton.classList.add("fade-in");
+      if (isMac) {
+        document
+          .getElementsByTagName("body")[0]
+          .insertAdjacentHTML("beforeend", macKeys);
+      } else {
+        document
+          .getElementsByTagName("body")[0]
+          .insertAdjacentHTML("beforeend", windowsKeys);
+      }
 
-  shortcuts.classList.remove("fade-in");
-  shortcuts.classList.add("fade-out");
-});
+      const shortcuts = document.getElementById("medium-shortcuts");
+      const hideButton = document.getElementById("hide");
+      const showButton = document.getElementById("show");
 
-showButton.addEventListener("click", () => {
-  shortcuts.classList.remove("fade-out");
-  shortcuts.classList.add("fade-in");
+      hideButton.addEventListener("click", () => {
+        showButton.classList.remove("fade-out");
+        showButton.classList.add("fade-in");
 
-  showButton.classList.remove("fade-in");
-  showButton.classList.add("fade-out");
-});
+        shortcuts.classList.remove("fade-in");
+        shortcuts.classList.add("fade-out");
+      });
+
+      showButton.addEventListener("click", () => {
+        shortcuts.classList.remove("fade-out");
+        shortcuts.classList.add("fade-in");
+
+        showButton.classList.remove("fade-in");
+        showButton.classList.add("fade-out");
+      });
+    }
+  },
+  false
+);

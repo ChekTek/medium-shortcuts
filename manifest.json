@@ -5,7 +5,7 @@
   "manifest_version": 3,
   "content_scripts": [
     {
-      "matches": ["https://medium.com/**/edit", "https://medium.com/new-story"],
+      "matches": ["https://medium.com/*"],
       "js": ["index.js"],
       "css": ["index.css"]
     }
