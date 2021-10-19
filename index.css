@@ -10,6 +10,10 @@
   opacity: 0;
 }
 
+.show-hide {
+  cursor: pointer;
+}
+
 #medium-shortcuts {
   display: flex;
   flex-direction: column;

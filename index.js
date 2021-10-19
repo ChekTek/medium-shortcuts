@@ -1,7 +1,7 @@
 const windowsKeys = `
-<a href="#" id="show" class="show-hide">Show Shortcuts</a>
+<span id="show" class="show-hide">Show Shortcuts</span>
 <div id="medium-shortcuts" class="fade-in">
-  <a href="#" id="hide" class="show-hide">Hide</a>
+  <span id="hide" class="show-hide">Hide</span>
   <div class="drawer-content u-alignBlock js-drawerTip">
     <span class="title">Keyboard shortcuts</span>
     <div class="table-container">
@@ -128,9 +128,9 @@ const windowsKeys = `
 `;
 
 const macKeys = `
-<a href="#" id="show" class="show-hide">Show Shortcuts</a>
+<span id="show" class="show-hide">Show Shortcuts</span>
 <div id="medium-shortcuts" class="fade-in">
-  <a href="#" id="hide" class="show-hide">Hide</a>  <div class="drawer-content u-alignBlock js-drawerTip">
+  <span id="hide" class="show-hide">Hide</span>  <div class="drawer-content u-alignBlock js-drawerTip">
     <span class="title">Keyboard shortcuts</span>
     <div class="table-container">
       <table class="drawer-list">
