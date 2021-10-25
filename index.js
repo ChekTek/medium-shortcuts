@@ -329,5 +329,5 @@ const initializeShortcuts = () => {
 const observerConfig = { childList: true, attributes: true, subtree: false };
 
 const removeShortcuts = () => {
-  document.getElementById("medium-shortcuts-container").remove();
+  document.getElementById("medium-shortcuts-container")?.remove();
 };
