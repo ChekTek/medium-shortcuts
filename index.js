@@ -1,4 +1,5 @@
 const windowsKeys = `
+<div id="medium-shortcuts-container">
 <span id="show" class="show-hide">Show Shortcuts</span>
 <div id="medium-shortcuts" class="fade-in">
   <span id="hide" class="show-hide">Hide</span>
@@ -125,9 +126,11 @@ const windowsKeys = `
     </div>
   </div>
 </div>
+</div>
 `;
 
 const macKeys = `
+<div id="medium-shortcuts-container">
 <span id="show" class="show-hide">Show Shortcuts</span>
 <div id="medium-shortcuts" class="fade-in">
   <span id="hide" class="show-hide">Hide</span>  <div class="drawer-content u-alignBlock js-drawerTip">
@@ -253,17 +256,36 @@ const macKeys = `
     </div>
   </div>
 </div>
+</div>
 `;
 
 document.addEventListener(
   "readystatechange",
   () => {
-    const isEdit = window.location.href.endsWith("/edit");
-    const isNewStory = window.location.href.endsWith("/new-story");
+    // capture the location at page load
+    let currentLocation = document.location.href;
 
-    if (isEdit || isNewStory) {
+    const observer = new MutationObserver((mutationList) => {
+      console.log("observed", currentLocation);
+
+      if (currentLocation !== document.location.href) {
+        // location changed!
+        currentLocation = document.location.href;
+        console.log("changeed", currentLocation);
+        // (do your event logic here)
+      }
+    });
+
+    observer.observe(document.querySelector("meta[property='og:url']"), {
+      childList: true,
+      attributes: true,
+      // important for performance
+      subtree: false,
+    });
+
+    if (shouldShowShortcuts()) {
       // attempts to solve browser inconsistencies
-      const platform = window?.navigator?.oscpu ?? window.navigator.platform;
+      const platform = window?.navigator?.oscpu ?? window?.navigator.platform;
       const isMac = platform?.toLowerCase().includes("mac");
 
       if (isMac) {
@@ -299,3 +321,10 @@ document.addEventListener(
   },
   false
 );
+
+const shouldShowShortcuts = () => {
+  return (
+    window.location.href.endsWith("/edit") ||
+    window.location.href.endsWith("/new-story")
+  );
+};
