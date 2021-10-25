@@ -262,62 +262,13 @@ const macKeys = `
 document.addEventListener(
   "readystatechange",
   () => {
-    // capture the location at page load
-    let currentLocation = document.location.href;
+    // this change detection is required because browser addons do not detect url changes for SPAs
+    const metaUrl = document.querySelector("meta[property='og:url']");
+    const observer = new MutationObserver(updateVisibility);
 
-    const observer = new MutationObserver((mutationList) => {
-      console.log("observed", currentLocation);
+    observer.observe(metaUrl, observerConfig);
 
-      if (currentLocation !== document.location.href) {
-        // location changed!
-        currentLocation = document.location.href;
-        console.log("changeed", currentLocation);
-        // (do your event logic here)
-      }
-    });
-
-    observer.observe(document.querySelector("meta[property='og:url']"), {
-      childList: true,
-      attributes: true,
-      // important for performance
-      subtree: false,
-    });
-
-    if (shouldShowShortcuts()) {
-      // attempts to solve browser inconsistencies
-      const platform = window?.navigator?.oscpu ?? window?.navigator.platform;
-      const isMac = platform?.toLowerCase().includes("mac");
-
-      if (isMac) {
-        document
-          .getElementsByTagName("body")[0]
-          .insertAdjacentHTML("beforeend", macKeys);
-      } else {
-        document
-          .getElementsByTagName("body")[0]
-          .insertAdjacentHTML("beforeend", windowsKeys);
-      }
-
-      const shortcuts = document.getElementById("medium-shortcuts");
-      const hideButton = document.getElementById("hide");
-      const showButton = document.getElementById("show");
-
-      hideButton.addEventListener("click", () => {
-        showButton.classList.remove("fade-out");
-        showButton.classList.add("fade-in");
-
-        shortcuts.classList.remove("fade-in");
-        shortcuts.classList.add("fade-out");
-      });
-
-      showButton.addEventListener("click", () => {
-        shortcuts.classList.remove("fade-out");
-        shortcuts.classList.add("fade-in");
-
-        showButton.classList.remove("fade-in");
-        showButton.classList.add("fade-out");
-      });
-    }
+    updateVisibility();
   },
   false
 );
@@ -327,4 +278,54 @@ const shouldShowShortcuts = () => {
     window.location.href.endsWith("/edit") ||
     window.location.href.endsWith("/new-story")
   );
+};
+
+const updateVisibility = () => {
+  if (shouldShowShortcuts()) {
+    initializeShortcuts();
+  } else {
+    removeShortcuts();
+  }
+};
+
+const initializeShortcuts = () => {
+  // attempts to solve browser inconsistencies
+  const platform = window?.navigator?.oscpu ?? window?.navigator.platform;
+  const isMac = platform?.toLowerCase().includes("mac");
+
+  if (isMac) {
+    document
+      .getElementsByTagName("body")[0]
+      .insertAdjacentHTML("beforeend", macKeys);
+  } else {
+    document
+      .getElementsByTagName("body")[0]
+      .insertAdjacentHTML("beforeend", windowsKeys);
+  }
+
+  const shortcuts = document.getElementById("medium-shortcuts");
+  const hideButton = document.getElementById("hide");
+  const showButton = document.getElementById("show");
+
+  hideButton.addEventListener("click", () => {
+    showButton.classList.remove("fade-out");
+    showButton.classList.add("fade-in");
+
+    shortcuts.classList.remove("fade-in");
+    shortcuts.classList.add("fade-out");
+  });
+
+  showButton.addEventListener("click", () => {
+    shortcuts.classList.remove("fade-out");
+    shortcuts.classList.add("fade-in");
+
+    showButton.classList.remove("fade-in");
+    showButton.classList.add("fade-out");
+  });
+};
+
+const observerConfig = { childList: true, attributes: true, subtree: false };
+
+const removeShortcuts = () => {
+  document.getElementById("medium-shortcuts-container").remove();
 };
