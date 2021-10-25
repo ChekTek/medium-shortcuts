@@ -266,7 +266,9 @@ document.addEventListener(
     const metaUrl = document.querySelector("meta[property='og:url']");
     const observer = new MutationObserver(updateVisibility);
 
-    observer.observe(metaUrl, observerConfig);
+    if (metaUrl) {
+      observer.observe(metaUrl, observerConfig);
+    }
 
     updateVisibility();
   },
