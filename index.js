@@ -294,36 +294,41 @@ const initializeShortcuts = () => {
   // attempts to solve browser inconsistencies
   const platform = window?.navigator?.oscpu ?? window?.navigator.platform;
   const isMac = platform?.toLowerCase().includes("mac");
+  const shortcutsAlreadyOnPage = document.getElementById(
+    "medium-shortcuts-container"
+  );
 
-  if (isMac) {
-    document
-      .getElementsByTagName("body")[0]
-      .insertAdjacentHTML("beforeend", macKeys);
-  } else {
-    document
-      .getElementsByTagName("body")[0]
-      .insertAdjacentHTML("beforeend", windowsKeys);
+  if (!shortcutsAlreadyOnPage) {
+    if (isMac) {
+      document
+        .getElementsByTagName("body")[0]
+        .insertAdjacentHTML("beforeend", macKeys);
+    } else {
+      document
+        .getElementsByTagName("body")[0]
+        .insertAdjacentHTML("beforeend", windowsKeys);
+    }
+
+    const shortcuts = document.getElementById("medium-shortcuts");
+    const hideButton = document.getElementById("hide");
+    const showButton = document.getElementById("show");
+
+    hideButton.addEventListener("click", () => {
+      showButton.classList.remove("fade-out");
+      showButton.classList.add("fade-in");
+
+      shortcuts.classList.remove("fade-in");
+      shortcuts.classList.add("fade-out");
+    });
+
+    showButton.addEventListener("click", () => {
+      shortcuts.classList.remove("fade-out");
+      shortcuts.classList.add("fade-in");
+
+      showButton.classList.remove("fade-in");
+      showButton.classList.add("fade-out");
+    });
   }
-
-  const shortcuts = document.getElementById("medium-shortcuts");
-  const hideButton = document.getElementById("hide");
-  const showButton = document.getElementById("show");
-
-  hideButton.addEventListener("click", () => {
-    showButton.classList.remove("fade-out");
-    showButton.classList.add("fade-in");
-
-    shortcuts.classList.remove("fade-in");
-    shortcuts.classList.add("fade-out");
-  });
-
-  showButton.addEventListener("click", () => {
-    shortcuts.classList.remove("fade-out");
-    shortcuts.classList.add("fade-in");
-
-    showButton.classList.remove("fade-in");
-    showButton.classList.add("fade-out");
-  });
 };
 
 const observerConfig = { childList: true, attributes: true, subtree: false };
